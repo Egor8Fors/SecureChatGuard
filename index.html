@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureChatGuard - Защита и мониторинг Telegram аккаунтов</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Анимация щита */
+        @keyframes shieldPulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5)); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.8)); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5)); }
+        }
+        .shield-icon {
+            animation: shieldPulse 2s ease-in-out infinite;
+        }
+        /* Анимация текста для однократного эффекта ввода */
+        .typing-effect {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid #3b82f6;
+            animation: typing 3s steps(40, end) 1, blink 0.75s step-end 3;
+            animation-fill-mode: forwards;
+        }
+        @keyframes typing {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+        /* Стили для бургер-меню */
+        .menu-open {
+            display: flex !important;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col min-h-screen">
+    <!-- Хедер -->
+    <header class="bg-blue-600 p-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">SecureChatGuard</h1>
+            <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+            <nav id="nav-menu" class="hidden md:flex md:space-x-4 flex-col md:flex-row absolute md:static top-16 left-0 w-full md:w-auto bg-blue-600 md:bg-transparent p-4 md:p-0">
+                <a href="#features" class="hover:text-blue-200 mb-2 md:mb-0">Возможности</a>
+                <a href="#how-it-works" class="hover:text-blue-200 mb-2 md:mb-0">Как это работает</a>
+                <a href="#contact" class="hover:text-blue-200">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Главная секция -->
+    <section class="flex-grow flex items-center justify-center py-12">
+        <div class="container mx-auto text-center px-4">
+            <div class="flex justify-center mb-6">
+                <svg class="w-16 h-16 shield-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 3c-4.418 0-8.418 2.418-10.5 6.182A12.006 12.006 0 003 12c0 1.657.336 3.234.936 4.682A11.955 11.955 0 0012 21c4.418 0 8.418-2.418 10.5-6.182A12.006 12.006 0 0021 12c0-1.657-.336-3.234-.936-4.682z"></path>
+                </svg>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 typing-effect">Защита Telegram аккаунтов</h2>
+            <p class="text-lg md:text-xl mb-8">Мониторинг в реальном времени, защита от фишинга и восстановление контроля над вашим аккаунтом.</p>
+            <a href="#contact" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Попробовать сейчас</a>
+        </div>
+    </section>
+
+    <!-- Секция возможностей -->
+    <section id="features" class="py-12 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-8">Наши возможности</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-6 bg-gray-700 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-2">Мониторинг активности</h3>
+                    <p>Отслеживайте подозрительные входы и действия в вашем аккаунте в реальном времени.</p>
+                </div>
+                <div class="p-6 bg-gray-700 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-2">Защита от фишинга</h3>
+                    <p>Автоматическое обнаружение и блокировка фишинговых ботов и ссылок.</p>
+                </div>
+                <div class="p-6 bg-gray-700 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-2">Восстановление аккаунта</h3>
+                    <p>Быстрое восстановление доступа к вашему аккаунту в случае компрометации.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция "Как это работает" -->
+    <section id="how-it-works" class="py-12">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-8">Как это работает</h2>
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-6 md:mb-0">
+                    <img src="https://via.placeholder.com/500" alt="SecureChatGuard работа" class="rounded-lg">
+                </div>
+                <div class="md:w-1/2 md:pl-8">
+                    <p class="mb-4">SecureChatGuard подключается к вашему Telegram аккаунту через API, обеспечивая мониторинг активности и уведомления о подозрительных действиях. Наша система использует передовые алгоритмы для обнаружения угроз и предотвращения несанкционированного доступа.</p>
+                    <p>Анимация щита символизирует нашу надежную защиту, а интуитивно понятный интерфейс позволяет легко управлять настройками безопасности.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция контактов -->
+    <section id="contact" class="py-12 bg-gray-800">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-8">Свяжитесь с нами</h2>
+            <p class="mb-4">Готовы защитить свой Telegram аккаунт? Оставьте заявку, и мы свяжемся с вами!</p>
+            <div class="max-w-md mx-auto">
+                <input type="email" placeholder="Ваш email" class="w-full p-2 mb-4 bg-gray-700 rounded">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Отправить</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="bg-blue-600 p-4 text-center">
+        <p>© 2025 SecureChatGuard. Все права защищены.</p>
+    </footer>
+
+    <script>
+        // Плавная прокрутка для навигации
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Закрытие меню на мобильных устройствах после клика
+                if (window.innerWidth < 768) {
+                    document.getElementById('nav-menu').classList.remove('menu-open');
+                }
+            });
+        });
+
+        // Обработчик для бургер-меню
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            document.getElementById('nav-menu').classList.toggle('menu-open');
+        });
+    </script>
+</body>
+</html>
